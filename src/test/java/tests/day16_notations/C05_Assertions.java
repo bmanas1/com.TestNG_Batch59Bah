@@ -1,0 +1,37 @@
+package tests.day16_notations;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import utilities.TestBase;
+
+public class C05_Assertions extends TestBase {
+
+
+    @Test
+    public void test01() {
+
+        //1-amazon anasayfaya gidin
+        driver.get("https://www.amazon.com");
+
+        //2-title in Amazon içerdigini test edin
+        String expectedTitle="amazon";
+        String actualTitle= driver.getTitle();
+        Assert.assertTrue(actualTitle.contains(expectedTitle));
+        //3-arama kutusnun erişilebilir oldugunu tets edin
+        WebElement aramaKutusu = driver.findElement(By.id("twotabsearchtextbox"));
+        Assert.assertTrue(aramaKutusu.isEnabled());
+        //4-arama kutusuna Nuella yazıp aratın
+        aramaKutusu.sendKeys("Nutella"+ Keys.ENTER);
+        //5-arama yapıldıgını test edin
+        WebElement sonuYaziElementi=driver.findElement(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']"));
+        //6-arama sonucunun Nutella içerdigini test edin
+        Assert.assertTrue(sonuYaziElementi.getText().contains("Kutella"));
+
+
+
+
+    }
+}
